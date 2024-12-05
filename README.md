@@ -1,122 +1,73 @@
-# Huffman Encoder and Decoder
+# Huffman Coding Spring Boot Integration
 
-This project implements the **Huffman Coding** algorithm using **Spring Boot** for both encoding and decoding of text. It provides a backend API for encoding a string into a binary format and decoding it back to its original form. The encoding also includes the frequency map as metadata to facilitate decoding.
+This project integrates the Huffman Coding algorithm into a Spring Boot application. It provides both a backend for encoding and decoding text, and a frontend interface for users to interact with.
+
+## Project Overview
+The application implements the Huffman Coding algorithm for text compression and decompression. It provides a simple REST API for encoding and decoding text, as well as a frontend for easy interaction.
 
 ## Features
-- **Huffman Encoding**: Converts a given string into its encoded binary form using Huffman coding.
-- **Huffman Decoding**: Decodes the binary string back to its original form using the frequency map included in the encoded string.
-- **Spring Boot Application**: REST API endpoints to handle encoding and decoding requests.
+- **Text Encoding**: Compresses text into binary based on character frequencies using the Huffman Coding algorithm.
+- **Text Decoding**: Decodes the binary string back into the original text.
+- **REST API**: Exposes endpoints to encode and decode text.
+- **Frontend Interface**: A simple HTML page to interact with the API.
 
-## Prerequisites
-- Java 17 or higher
-- Maven for dependency management
-- Spring Boot for building the backend
-- A web browser or API testing tool like Postman for interacting with the API
+## Installation
 
-## Project Structure
-```
-src/
- └── main/
-     ├── java/
-     │   └── com/mugiwara/huffmancoder/
-     │       ├── controller/              # Contains the controller for handling HTTP requests
-     │       ├── service/                 # Contains the logic for Huffman encoding and decoding
-     │       ├── dto/                     # Contains data transfer objects (DTOs)
-     │       └── HuffmanApplication.java  # Main entry point for Spring Boot application
-     ├── resources/
-     │   └── application.properties       # Application configuration
-```
+### Prerequisites
+- Java 21 or higher
+- Maven or Gradle for building the Spring Boot project
+- Spring Boot 2.5 or later
+- Web browser for accessing the frontend
+
+### Steps to Run Locally
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/MatheshRavichandrann/HuffmanCodingSpringBoot.git
+   ```
+
+2. **Navigate to the project directory**:
+   ```bash
+   cd HuffmanCodingSpringBoot
+   ```
+
+3. **Build and run the Spring Boot project**:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+   This will start the Spring Boot server on `http://localhost:8080`.
+
+4. **Open `index.html` in a browser**:
+   Navigate to the `src/main/resources/static` folder and open `index.html` in your preferred browser.
 
 ## API Endpoints
 
-### 1. **POST /huffman/encode**
-Encodes a given input string into a binary representation using Huffman coding and returns the encoded string along with the frequency map as metadata.
+### Encode Text
+- **URL**: `/api/huffman/encode`
+- **Method**: `POST`
+- **Parameters**: `input` (The text to encode)
+- **Response**: Encoded binary string
 
-**Request:**
-```bash
-POST /huffman/encode?input=abbccda
-```
+### Decode Text
+- **URL**: `/api/huffman/decode`
+- **Method**: `POST`
+- **Parameters**: 
+  - `input`: The original text for tree building
+  - `encodedText`: The binary string to decode
+- **Response**: Decoded original text
 
-**Response:**
-```json
-{
-  "encodedString": "1010011110011",
-  "frequencyMap": "a:2;b:2;c:2;d:1;"
-}
-```
+## Frontend (HTML + JavaScript)
 
-### 2. **POST /huffman/decode**
-Decodes an encoded string using the frequency map to reconstruct the original input string.
+The frontend allows the user to input text for encoding or decoding. The JavaScript code interacts with the Spring Boot backend via REST API calls.
 
-**Request:**
-```bash
-POST /huffman/decode?encodedInput=1010011110011|a:2;b:2;c:2;d:1;
-```
+## Usage
 
-**Response:**
-```json
-{
-  "decodedString": "abbccda"
-}
-```
-
-## Running the Project
-
-### 1. Clone the repository:
-```bash
-git clone https://github.com/your-username/huffman-coding-springboot.git
-cd huffman-coding-springboot
-```
-
-### 2. Build the project using Maven:
-```bash
-mvn clean install
-```
-
-### 3. Run the Spring Boot application:
-```bash
-mvn spring-boot:run
-```
-
-The application will start on `http://localhost:8080`.
-
-## Example Usage
-
-### **Encoding Example**
-- Request:
-  ```bash
-  POST http://localhost:8080/huffman/encode?input=abbccda
-  ```
-
-- Response:
-  ```json
-  {
-    "encodedString": "1010011110011",
-    "frequencyMap": "a:2;b:2;c:2;d:1;"
-  }
-  ```
-
-### **Decoding Example**
-- Request:
-  ```bash
-  POST http://localhost:8080/huffman/decode?encodedInput=1010011110011|a:2;b:2;c:2;d:1;
-  ```
-
-- Response:
-  ```json
-  {
-    "decodedString": "abbccda"
-  }
-  ```
-
-## Technologies Used
-- **Spring Boot**: Framework for building the backend service.
-- **Java 17**: Programming language used for the backend.
-- **Maven**: Build automation tool for managing dependencies and packaging.
-- **Huffman Coding**: Lossless data compression algorithm used for encoding and decoding the data.
+- **Encoding**: Enter your text in the provided text box and click the "Encode" button to get the encoded binary string.
+- **Decoding**: Enter the encoded binary string and click the "Decode" button to retrieve the original text.
 
 ## Contributing
-Feel free to fork the repository, submit issues, and contribute to this project. If you find any bugs or have suggestions for improvements, open an issue or create a pull request.
+Feel free to fork the repository and submit pull requests. Contributions are welcome!
 
 ## License
-This project is open-source and available under the MIT License.
+This project is licensed under the MIT License - see the LICENSE file for details.
